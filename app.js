@@ -25,4 +25,28 @@ async function wikiApiCall(searchInput) {
 
   const data = await response.json();
   console.log(data);
+
+  createCards(data.query.search);
+}
+
+const reusltsDisplay = document.querySelector(".results-display");
+
+function createCards(data) {
+  if (!data.length) {
+    errorMsg.textContent = "Wopsy, aucun résultat";
+    return;
+  }
+  data.forEach((el) => {
+    const url = `https://en.wikipedia.org/?curid=${el.pageid}`;
+    const card = document.createElement("div");
+    card.className = "result-item";
+    card.innerHTML = `
+    <h3 class="result-title"> 
+    <a href=${url} target="_blank">${el.title}</a>
+    </h3> 
+    <a href=${url} class="result-link" target="_blank">${url}</a> 
+    <span class="result-snipet">${el.snippet}</span> <br>`;
+
+    reusltsDisplay.appendChild(card);
+  });
 }
