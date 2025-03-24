@@ -17,19 +17,28 @@ function handleSubmit(e) {
   } else {
     errorMsg.textContent = "";
     loader.style.display = "flex";
+    resultsDisplay.textContent = "";
     wikiApiCall(input.value);
   }
 }
 
 async function wikiApiCall(searchInput) {
-  const response = await fetch(
-    `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=20&srsearch=${searchInput}`
-  );
+  try {
+    const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=20&srsearch=${searchInput}`
+    );
 
-  const data = await response.json();
-  console.log(data);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`${response.status}`);
+    }
+    console.log(data);
 
-  createCards(data.query.search);
+    createCards(data.query.search);
+  } catch (error) {
+    errorMsg.textContent = `${error}`;
+    loader.style.display = "none";
+  }
 }
 
 const reusltsDisplay = document.querySelector(".results-display");
