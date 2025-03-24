@@ -46,6 +46,7 @@ const reusltsDisplay = document.querySelector(".results-display");
 function createCards(data) {
   if (!data.length) {
     errorMsg.textContent = "Wopsy, aucun résultat";
+    loader.style.display = "none";
     return;
   }
   data.forEach((el) => {
