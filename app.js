@@ -3,7 +3,7 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const errorMsg = document.querySelector(".error-msg");
-const resultsDisplay = document.querySelector("resuls-display");
+const resultsDisplay = document.querySelector(".results-display");
 const loader = document.querySelector(".loader");
 
 form.addEventListener("submit", handleSubmit);
@@ -17,7 +17,7 @@ function handleSubmit(e) {
   } else {
     errorMsg.textContent = "";
     loader.style.display = "flex";
-    resultsDisplay.textContent = "";
+    resultsDisplay.textContent = " ";
     wikiApiCall(input.value);
   }
 }
@@ -62,4 +62,5 @@ function createCards(data) {
 
     reusltsDisplay.appendChild(card);
   });
+  loader.style.display = "none";
 }
