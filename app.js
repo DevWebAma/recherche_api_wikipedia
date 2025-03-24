@@ -3,6 +3,7 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const errorMsg = document.querySelector(".error-msg");
+const resultsDisplay = document.querySelector("resuls-display");
 const loader = document.querySelector(".loader");
 
 form.addEventListener("submit", handleSubmit);
