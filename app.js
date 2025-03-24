@@ -3,6 +3,7 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const errorMsg = document.querySelector(".error-msg");
+const loader = document.querySelector(".loader");
 
 form.addEventListener("submit", handleSubmit);
 
@@ -14,6 +15,7 @@ function handleSubmit(e) {
     return;
   } else {
     errorMsg.textContent = "";
+    loader.style.display = "flex";
     wikiApiCall(input.value);
   }
 }
